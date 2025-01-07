@@ -14,7 +14,7 @@ class ApiService {
     this.api.interceptors.response.use(
       response => response,
       error => {
-        console.error(error.response?.data?.message || error.message);
+        console.error("API error : ", error.response?.data?.message || error.message);
         return Promise.reject(error);
       }
     );
