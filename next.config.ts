@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    // remotePatterns or domains for local images
+    // domain images
   },
 
   async redirects() {
