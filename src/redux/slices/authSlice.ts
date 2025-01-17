@@ -1,29 +1,35 @@
-import { AuthReduxState, UserDataType } from '@/types';
+import { AuthReduxState, UserDataType } from '@/types/index.ts';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import cookies from "browser-cookies";
 
 
 const initialState: AuthReduxState = {
   user: null,
-  isLoading: false,
+  isLoading: true,
+  darkMode: false
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<UserDataType | null>) => {
+    setUserState: (state, action: PayloadAction<UserDataType | null>) => {
       state.user = action.payload;
       state.isLoading = false;
     },
-    logout: (state) => {
+    logoutState: (state) => {
       state.user = null;
       state.isLoading = false;
+      cookies.erase("token");
     },
-    setLoading: (state, action: PayloadAction<boolean>) => {
+    setLoadingState: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
+    },
+    setDarkMode: (state, action: PayloadAction<boolean>) => {
+      state.darkMode = action.payload;
     }
   },
 });
 
-export const { setUser, logout, setLoading } = authSlice.actions;
+export const { setUserState, logoutState, setLoadingState, setDarkMode } = authSlice.actions;
 export default authSlice.reducer;
