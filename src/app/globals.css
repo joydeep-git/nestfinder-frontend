@@ -1,11 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* @tailwind base; */
+/* @tailwind components; */
+/* @tailwind utilities; */
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
 
 body {
   font-family: "Lato", serif;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .heading-font{
@@ -77,7 +84,6 @@ body {
     box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
   }
 }
-
 .loadingAnimation {
   position: absolute;
   top: calc(50% - 1.25em);
@@ -85,9 +91,18 @@ body {
 }
 
 
+/* Hide number field toggles */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
 
-
-
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+/* /////////////////////  */
 
 
 

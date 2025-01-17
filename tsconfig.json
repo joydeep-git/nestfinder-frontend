@@ -21,7 +21,6 @@
     "baseUrl": ".",
     "types": [
       "node",
-      "jest"
     ],
     "plugins": [
       {
@@ -29,26 +28,29 @@
       }
     ],
     "paths": {
+      "@/app/*": [
+        "src/app/*"
+      ],
+      "@/assets/*": [
+        "src/assets/*"
+      ],
       "@/components/*": [
         "src/components/*"
-      ],
-      "@/api/*": [
-        "src/api/*"
-      ],
-      "@/redux/*": [
-        "src/redux/*"
-      ],
-      "@/hooks/*": [
-        "src/hooks/*"
-      ],
-      "@/types/*": [
-        "src/types/*"
       ],
       "@/lib/*": [
         "src/lib/*"
       ],
-      "@/assets/*": [
-        "src/assets/*"
+      "@/redux/*": [
+        "src/redux/*"
+      ],
+      "@/services/*": [
+        "src/services/*"
+      ],
+      "@/types/*": [
+        "src/types/*"
+      ],
+      "@/utils/*": [
+        "src/utils/*"
       ],
     }
   },
