@@ -1,5 +1,5 @@
-import { UserDataType, verifyUserType } from "@/types/index.ts";
-import ApiService from "@/api/apiService.ts";
+import { AxiosResponseType } from "@/types/index.ts";
+import ApiService from "@/services/apiService";
 
 
 class AuthService extends ApiService {
@@ -10,15 +10,15 @@ class AuthService extends ApiService {
 
 
   // Verify token during loading
-  async verifyAuthToken(token: string): Promise<verifyUserType> {
-    const res = await this.api.post(`/verify-user`, { token });
+  async verifyAuthToken(): Promise<AxiosResponseType> {
+    const res = await this.api.get("/verify-token");
     return res.data;
   };
 
 
 
-  async signIn({ email, password }: { email: string; password: string }): Promise<UserDataType> {
-    const res = await this.api.post(`/signin`, { email, password });
+  async signIn({ email, password }: { email: string; password: string }): Promise<AxiosResponseType> {
+    const res = await this.api.post(`/sign-in`, { email, password });
     return res.data;
   };
 
@@ -38,8 +38,8 @@ class AuthService extends ApiService {
     password: string;
     number: string;
     avatar?: string;
-  }): Promise<UserDataType> {
-    const res = await this.api.post(`/signup`, {
+  }): Promise<AxiosResponseType> {
+    const res = await this.api.post(`/sign-up`, {
       firstName,
       lastName,
       number,
@@ -53,7 +53,7 @@ class AuthService extends ApiService {
 
 
   async signOut(): Promise<void> {
-    const res = await this.api.get(`/signout`);
+    const res = await this.api.get(`/sign-out`);
     return res.data;
   }
 
