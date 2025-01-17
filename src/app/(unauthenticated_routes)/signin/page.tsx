@@ -101,7 +101,7 @@ const Page = ({ className }: { className?: string }) => {
   return (
     <MotionDiv className="h-screen items-center justify-center overflow-y-auto relative">
 
-      <Button variant="destructive" className="absolute self-start" onClick={() => router.back()}>
+      <Button variant="destructive" className="absolute self-start" onClick={() => router.push("/")}>
         <ArrowLeftToLine />
       </Button>
 

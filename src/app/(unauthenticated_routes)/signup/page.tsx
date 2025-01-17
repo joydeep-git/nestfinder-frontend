@@ -89,7 +89,7 @@ const Page = () => {
   return (
     <MotionDiv className="flex flex-col gap-0 items-center justify-center min-h-screen overflow-hidden my-4 md:my-auto">
 
-      <Button variant="destructive" className="absolute self-start" onClick={() => router.back()}>
+      <Button variant="destructive" className="absolute self-start" onClick={() => router.push("/")}>
         <ArrowLeftToLine />
       </Button>
 
