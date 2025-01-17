@@ -1,26 +1,30 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import StoreProvider from "./StoreProvider";
+import { Toaster } from "react-hot-toast";
+import { ReactNode } from "react";
+import ClientLayoutHandler from "../components/ClientLayoutHandler";
+
+
 
 export const metadata: Metadata = {
-  title: "Nest Finder",
+  title: "NestFinder",
   description: "Buy, Sell or Rent properties directly from owners.",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+
+const RootLayout = ({ children }: { children: Readonly<ReactNode> }) => {
+
   return (
     <html lang="en">
-      <body
-        className={`antialiased`}
-      >
+      <body className={`antialiased`}>
         <StoreProvider>
-          {children}
+          <ClientLayoutHandler>{children}</ClientLayoutHandler>
+          <Toaster position="top-right" reverseOrder={false} />
         </StoreProvider>
       </body>
-    </html>
+    </html >
   );
-}
+};
+
+export default RootLayout;
