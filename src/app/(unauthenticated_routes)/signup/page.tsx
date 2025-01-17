@@ -22,7 +22,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Image from "next/image";
-import { Eye, EyeOff } from "lucide-react";
+import { ArrowLeftToLine, Eye, EyeOff } from "lucide-react";
 import { useAppDispatch } from "@/redux/store";
 import { setUserState } from "@/redux/slices/authSlice";
 
@@ -88,6 +88,11 @@ const Page = () => {
 
   return (
     <MotionDiv className="flex flex-col gap-0 items-center justify-center min-h-screen overflow-hidden my-4 md:my-auto">
+
+      <Button variant="destructive" className="absolute self-start" onClick={() => router.back()}>
+        <ArrowLeftToLine />
+      </Button>
+
       <Card className="overflow-hidden shadow-lg rounded-lg max-w-full md:max-w-4xl w-full">
         <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4 px-6 py-8 overflow-hidden">
           <form
