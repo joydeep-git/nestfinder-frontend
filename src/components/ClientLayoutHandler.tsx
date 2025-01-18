@@ -53,12 +53,8 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
 
   // check current routes
   useEffect(() => {
-    if (user && (pathname === "/signin" || pathname === "/signup")) {
+    if (user && (pathname === "/sign-in" || pathname === "/sign-up")) {
       router.push("/profile");
-    }
-
-    if (!user && (pathname === "/profile")) {
-      router.back();
     }
   }, [pathname, router, user]);
 
@@ -71,7 +67,7 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
 
   return (
     <>
-      {!(pathname === "/signin" || pathname === "/signup" ) && <Navbar /> }
+      {!(pathname === "/sign-in" || pathname === "/sign-up") && <Navbar />}
       {children}
     </>
   );

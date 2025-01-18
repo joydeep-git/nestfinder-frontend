@@ -42,7 +42,7 @@ const Navbar = () => {
           {
             user
               ? <DropdownMenu />
-              : <Link href="/signin" className='inline-flex h-8 px-3 items-center justify-center gap-0 whitespace-nowrap rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90'>
+              : <Link href="/sign-in" className='inline-flex h-8 px-3 items-center justify-center gap-0 whitespace-nowrap rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90'>
                 Login <ChevronRight className='h-4 w-4' />
               </Link>
           }

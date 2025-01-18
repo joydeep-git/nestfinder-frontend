@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { AxiosError } from "axios";
 import { AxiosResponseType } from "@/types/index";
-import { authService } from "@/services/authService"; 
+import { authService } from "@/services/authService";
 import { axiosErrorHandler } from "@/utils/helperFunctions";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { setUserState } from "@/redux/slices/authSlice";
@@ -168,7 +168,7 @@ const Page = ({ className }: { className?: string }) => {
                 {/* Signup Link */}
                 <div>
                   Don&apos;t have an account?{" "}
-                  <Button type="button" disabled={isLoading} variant="link" onClick={() => router.push("/signup")}>
+                  <Button type="button" disabled={isLoading} variant="link" onClick={() => router.push("/sign-up")}>
                     Sign Up
                   </Button>
                 </div>

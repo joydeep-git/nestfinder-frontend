@@ -106,7 +106,7 @@ const Page = () => {
 
               <MotionHeading>NestFinder</MotionHeading>
               <MotionText>Create account</MotionText>
-              
+
             </div>
 
             <div className="flex gap-3">
@@ -198,7 +198,7 @@ const Page = () => {
                 type="button"
                 disabled={isLoading}
                 variant="link"
-                onClick={() => router.push("/signin")}
+                onClick={() => router.push("/sign-in")}
               >
                 Sign In
               </Button>
