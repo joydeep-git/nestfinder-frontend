@@ -1,12 +1,12 @@
 import SearchModal from '@/components/SearchDrawer';
 import DropdownMenu from '@/components/DropdownMenu';
 import { NestFinderIcon } from '@/assets/Icons/NestFinderIcon';
-import { Button } from '@/components/ui/button';
 import { useAppSelector } from '@/redux/store';
 import { ThemeSwitcher } from './ThemeSwitcher';
 import { useRouter } from 'next/navigation';
 import { motion } from "motion/react";
 import { ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 
 
 
@@ -42,9 +42,9 @@ const Navbar = () => {
           {
             user
               ? <DropdownMenu />
-              : <Button size={"sm"} onClick={() => router.push("/signin")}>
-                Login <ChevronRight />
-              </Button>
+              : <Link href="/signin" className='inline-flex h-8 px-3 items-center justify-center gap-0 whitespace-nowrap rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90'>
+                Login <ChevronRight className='h-4 w-4' />
+              </Link>
           }
         </motion.div>
 
