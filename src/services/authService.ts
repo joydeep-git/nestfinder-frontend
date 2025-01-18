@@ -52,7 +52,7 @@ class AuthService extends ApiService {
 
 
 
-  async signOut(): Promise<void> {
+  async signOut(): Promise<AxiosResponseType> {
     const res = await this.api.get(`/sign-out`);
     return res.data;
   }
