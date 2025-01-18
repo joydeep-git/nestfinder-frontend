@@ -18,7 +18,7 @@ class AuthService extends ApiService {
 
 
   async signIn({ email, password }: { email: string; password: string }): Promise<AxiosResponseType> {
-    const res = await this.api.post(`/sign-in`, { email, password });
+    const res = await this.api.post(`/sign-in`, { email: email.toLowerCase(), password });
     return res.data;
   };
 
@@ -43,7 +43,7 @@ class AuthService extends ApiService {
       firstName,
       lastName,
       number,
-      email,
+      email: email.toLowerCase(),
       password,
       avatar
     });
