@@ -7,7 +7,7 @@ import { motion } from "motion/react";
 import { z } from "zod";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { MotionDiv, MotionHeading, MotionImage } from "@/components/utils/motionWrapper";
+import { MotionDiv, MotionHeading, MotionImage, MotionText } from "@/components/utils/motionWrapper";
 import { authService } from "@/services/authService";
 import { AxiosResponseType } from "@/types/index";
 import toast from "react-hot-toast";
@@ -15,16 +15,18 @@ import { useMutation } from "react-query";
 import authImage from "@/assets/Images/auth-page.jpg";
 import { AxiosError } from "axios";
 import { axiosErrorHandler } from "@/utils/helperFunctions";
+import Link from "next/link";
+import { setUserState } from "@/redux/slices/authSlice";
+import { useAppDispatch } from "@/redux/store";
+import Image from "next/image";
+
+import { Eye, EyeOff, SquareArrowLeft } from "lucide-react";
 
 // UI Components
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import Image from "next/image";
-import { ArrowLeftToLine, Eye, EyeOff } from "lucide-react";
-import { useAppDispatch } from "@/redux/store";
-import { setUserState } from "@/redux/slices/authSlice";
 
 // Zod Schema Form Validation
 const signupSchema = z.object({
@@ -89,19 +91,23 @@ const Page = () => {
   return (
     <MotionDiv className="flex flex-col gap-0 items-center justify-center min-h-screen overflow-hidden my-4 md:my-auto">
 
-      <Button variant="destructive" className="absolute self-start" onClick={() => router.push("/")}>
-        <ArrowLeftToLine />
-      </Button>
-
       <Card className="overflow-hidden shadow-lg rounded-lg max-w-full md:max-w-4xl w-full">
         <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4 px-6 py-8 overflow-hidden">
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col space-y-2 w-full p-6 rounded-md"
           >
-            <MotionHeading className="text-center mb-4 whitespace-nowrap w-full md:mb-8">
-              Welcome to NestFinder
-            </MotionHeading>
+
+            <div className="flex flex-col items-center justify-center text-center mb-6">
+
+              <Link href="/" className="absolute self-start">
+                <SquareArrowLeft className="h-6 w-6" />
+              </Link>
+
+              <MotionHeading>NestFinder</MotionHeading>
+              <MotionText>Create account</MotionText>
+              
+            </div>
 
             <div className="flex gap-3">
               <div className="gap-2">

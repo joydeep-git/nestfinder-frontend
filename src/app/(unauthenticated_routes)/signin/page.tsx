@@ -23,10 +23,11 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Link from "next/link";
 
 
 // Icons
-import { EyeOff, Eye, ArrowLeftToLine } from "lucide-react";
+import { EyeOff, Eye, SquareArrowLeft } from "lucide-react";
 
 
 
@@ -101,17 +102,18 @@ const Page = ({ className }: { className?: string }) => {
   return (
     <MotionDiv className="h-screen items-center justify-center overflow-y-auto relative">
 
-      <Button variant="destructive" className="absolute self-start" onClick={() => router.push("/")}>
-        <ArrowLeftToLine />
-      </Button>
-
       <div className={cn("flex flex-col gap-6 w-full max-w-sm md:max-w-3xl", className)}>
         <Card className="overflow-hidden shadow-xl">
           <CardContent className="grid gap-4 p-4 sm:p-6 md:grid-cols-2 md:p-0">
             <form className="p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-col gap-6">
                 {/* Header */}
-                <div className="flex flex-col items-center text-center">
+                <div className="flex flex-col items-center justify-center text-center">
+
+                  <Link href="/" className="absolute self-start">
+                    <SquareArrowLeft className="h-6 w-6" />
+                  </Link>
+
                   <MotionHeading>Welcome Back</MotionHeading>
                   <MotionText>Login to NestFinder</MotionText>
                 </div>
