@@ -19,7 +19,7 @@ export const MotionDiv = ({
       animate={animate}
       transition={transition}
       className={cn(
-        "flex flex-col space-y-6 mx-auto px-2.5 md:px-20 gap-6 items-center justify-center max-w-screen-xl min-h-screen overflow-y-auto overflow-x-hidden",
+        "flex flex-col space-y-6 mx-auto px-2.5 md:px-20 gap-6 items-center justify-center h-full max-w-screen-xl overflow-y-auto overflow-x-hidden",
         className
       )}
     >

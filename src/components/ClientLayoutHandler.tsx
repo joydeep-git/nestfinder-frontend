@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { authService } from "@/services/authService";
 import { AxiosError } from "axios";
@@ -23,6 +23,8 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
 
   // Global Loading State
   const { user, isLoading: globalLoadingState } = useAppSelector(state => state.auth);
+
+  const [isAuthPages, setIsAuthPages] = useState(false);
 
 
   // Verify token on every reload
@@ -56,6 +58,9 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
     if (user && (pathname === "/sign-in" || pathname === "/sign-up")) {
       router.push("/profile");
     }
+
+    setIsAuthPages(pathname === "/sign-in" || pathname === "/sign-up");
+
   }, [pathname, router, user]);
 
 
@@ -66,10 +71,14 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <>
-      {!(pathname === "/sign-in" || pathname === "/sign-up") && <Navbar />}
-      {children}
-    </>
+    <main className="flex flex-col h-screen">
+      
+      {!isAuthPages && <Navbar />}
+      
+      <div className={`flex-1 ${!isAuthPages && "pt-14"}`}>
+        {children}
+      </div>
+    </main>
   );
 };
 

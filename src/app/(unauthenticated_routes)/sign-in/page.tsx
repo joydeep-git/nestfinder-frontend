@@ -100,7 +100,7 @@ const Page = ({ className }: { className?: string }) => {
 
 
   return (
-    <MotionDiv className="h-screen items-center justify-center overflow-y-auto relative">
+    <MotionDiv className="h-full items-center justify-center overflow-y-auto relative">
 
       <div className={cn("flex flex-col gap-6 w-full max-w-sm md:max-w-3xl", className)}>
         <Card className="overflow-hidden shadow-xl">

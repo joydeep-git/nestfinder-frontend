@@ -19,8 +19,7 @@ const Navbar = () => {
   const { darkMode, user } = useAppSelector(state => state.auth);
 
   return (
-    <>
-      <nav className="w-full border-b px-4 md:px-8 py-3 flex items-center justify-between shadow-md">
+      <nav className="w-full border-b px-4 md:px-8 py-3 flex items-center justify-between shadow-md fixed top-0 left-0 z-50 bg-primary-foreground">
 
 
         {/* Logo / Icon */}
@@ -49,7 +48,6 @@ const Navbar = () => {
         </motion.div>
 
       </nav>
-    </>
   );
 };
 

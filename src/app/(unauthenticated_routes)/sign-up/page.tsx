@@ -89,7 +89,7 @@ const Page = () => {
 
 
   return (
-    <MotionDiv className="flex flex-col gap-0 items-center justify-center min-h-screen overflow-hidden my-4 md:my-auto">
+    <MotionDiv className="flex flex-col gap-0 items-center justify-center my-4 md:my-auto">
 
       <Card className="overflow-hidden shadow-lg rounded-lg max-w-full md:max-w-4xl w-full">
         <CardContent className="grid grid-cols-1 md:grid-cols-2 gap-4 px-6 py-8 overflow-hidden">
