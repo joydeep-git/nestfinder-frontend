@@ -24,18 +24,32 @@ export interface MotionWrapperProps {
 
 
 // Redux States
-export type UserDataType = {
+interface UserDataType extends UserProfileDataType {
   _id: string;
+  createdAt: string;
+  updatedAt: string;
+  _v: number;
+}
+
+
+export interface UserProfileDataType {
   username: string;
   firstName: string;
   lastName: string;
   email: string;
   number: string;
   avatar: string;
-  createdAt: string;
-  updatedAt: string;
-  _v: number;
 }
+
+
+export interface UserProfileUpdateType {
+  username: string;
+  firstName: string;
+  lastName: string;
+  number: string;
+}
+
+
 
 export type AuthReduxState = {
   user: UserDataType | null;
@@ -55,7 +69,7 @@ export type AuthReduxState = {
 
 
 // All API response Type
-export interface AxiosResponseType {
+export interface AxiosSuccessResponseType {
   success: true;
   message: string;
   data: UserDataType;
@@ -64,7 +78,7 @@ export interface AxiosResponseType {
 
 
 // Axios Error Types
-export interface AxiosErrorType {
+export interface AxiosErrorResponseType {
   success: boolean;
   status: number;
   message: string;
