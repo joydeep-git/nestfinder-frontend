@@ -1,7 +1,10 @@
-import axios, { AxiosError, AxiosInstance } from "axios";
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from "axios";
+
 
 class ApiService {
+
   protected api: AxiosInstance;
+
 
   constructor(url: string) {
     this.api = axios.create({
@@ -9,25 +12,12 @@ class ApiService {
       withCredentials: true, // Allow cookies
     });
 
+
     // Interceptors for response
     this.api.interceptors.response.use(
-      response => response,
-      (error: AxiosError) => {
-        const message = this.getErrorMessage(error);
-        return Promise.reject(message);
-      }
-    );
-  }
-
-  // handle errors
-  private getErrorMessage(error: AxiosError): string {
-    if (error.response) {
-      return error.response?.data?.message || 'An error occurred while processing your request.';
-    } else if (error.request) {
-      return 'No response from server. Please check your internet connection.';
-    } else {
-      return error.message || 'An unexpected error occurred.';
-    }
+      (response: AxiosResponse) => response.data,
+      (error: AxiosError) => { return Promise.reject(error.response?.data) }
+    )
   }
 }
 

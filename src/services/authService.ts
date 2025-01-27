@@ -1,4 +1,4 @@
-import { AxiosResponseType } from "@/types/index.ts";
+import { AxiosSuccessResponseType } from "@/types/index.ts";
 import ApiService from "@/services/apiService";
 
 
@@ -10,16 +10,16 @@ class AuthService extends ApiService {
 
 
   // Verify token during loading
-  async verifyAuthToken(): Promise<AxiosResponseType> {
-    const res = await this.api.get("/verify-token");
-    return res.data;
+  async verifyAuthToken(): Promise<AxiosSuccessResponseType> {
+    return await this.api.get("/verify-token");
   };
 
 
 
-  async signIn({ email, password }: { email: string; password: string }): Promise<AxiosResponseType> {
-    const res = await this.api.post(`/sign-in`, { email: email.toLowerCase(), password });
-    return res.data;
+  async signIn({ email, password }: { email: string; password: string }): Promise<AxiosSuccessResponseType> {
+
+    return await this.api.post(`/sign-in`, { email: email.toLowerCase(), password });
+
   };
 
 
@@ -38,8 +38,8 @@ class AuthService extends ApiService {
     password: string;
     number: string;
     avatar?: string;
-  }): Promise<AxiosResponseType> {
-    const res = await this.api.post(`/sign-up`, {
+  }): Promise<AxiosSuccessResponseType> {
+    return await this.api.post(`/sign-up`, {
       firstName,
       lastName,
       number,
@@ -47,14 +47,12 @@ class AuthService extends ApiService {
       password,
       avatar
     });
-    return res.data;
   };
 
 
 
-  async signOut(): Promise<AxiosResponseType> {
-    const res = await this.api.get(`/sign-out`);
-    return res.data;
+  async signOut(): Promise<AxiosSuccessResponseType> {
+    return await this.api.get(`/sign-out`);
   }
 
 
