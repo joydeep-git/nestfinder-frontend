@@ -17,9 +17,7 @@ class AuthService extends ApiService {
 
 
   async signIn({ email, password }: { email: string; password: string }): Promise<AxiosSuccessResponseType> {
-
     return await this.api.post(`/sign-in`, { email: email.toLowerCase(), password });
-
   };
 
 
