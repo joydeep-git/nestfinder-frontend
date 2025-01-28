@@ -84,3 +84,13 @@ export interface AxiosErrorResponseType {
   message: string;
   stack?: string;
 }
+
+
+
+// All Routes Data type
+export interface DropdownOptionType {
+  icon: ReactNode;
+  title: string;
+  url: string;
+}
+
