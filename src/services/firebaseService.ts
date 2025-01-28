@@ -20,16 +20,18 @@ class FirebaseService {
 
   private storage = getStorage(this.app);
 
-  public async uploadImage(file: File, folderName: string): Promise<string> {
+  public async getDownloadUrl({ file, folder }: { file: File; folder: "profile" | "property" }) {
     try {
 
-      const imgName = `${folderName}/${new Date().getTime()}_${file.name}`;
+      const imgName = `${folder === "profile" ? "profile_images" : "property_images"}/${new Date().getTime()}_${file.name}`;
 
       const storageRef = ref( this.storage , imgName);
 
       const uploadImg = await uploadBytes(storageRef, file);
 
-      return await getDownloadURL(uploadImg.ref);
+      const url = await getDownloadURL(uploadImg.ref);
+      
+      return url;
       
     } catch (error) {
       throw error;
