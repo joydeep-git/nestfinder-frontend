@@ -9,15 +9,11 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MotionDiv, MotionHeading, MotionImage, MotionText } from "@/components/utils/motionWrapper";
 import { authService } from "@/services/authService";
-import { AxiosResponseType } from "@/types/index";
+import { AxiosErrorResponseType, AxiosSuccessResponseType } from "@/types/index";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
 import authImage from "@/assets/Images/auth-page.jpg";
-import { AxiosError } from "axios";
-import { axiosErrorHandler } from "@/utils/helperFunctions";
 import Link from "next/link";
-import { setUserState } from "@/redux/slices/authSlice";
-import { useAppDispatch } from "@/redux/store";
 import Image from "next/image";
 
 import { Eye, EyeOff, SquareArrowLeft } from "lucide-react";
@@ -43,7 +39,6 @@ const Page = () => {
 
 
   const router = useRouter();
-  const dispatch = useAppDispatch();
 
 
   // Formstates
@@ -58,18 +53,15 @@ const Page = () => {
 
 
   // Mutation function
-  const { mutate, isLoading } = useMutation<AxiosResponseType, AxiosError, SignupFormData>(
+  const { mutate, isLoading } = useMutation<AxiosSuccessResponseType, AxiosErrorResponseType, SignupFormData>(
     (data) => authService.signUp(data),
     {
       onSuccess: (data) => {
-        toast.success(`Account created Successfully!`);
-        dispatch(setUserState(data.data));
-
-        router.push("/");
+        toast.success(`${data.data.firstName.toUpperCase()}, Account created Successfully!`);
+        router.push("/sign-in");
       },
-      onError: (err: AxiosError) => {
-        const message = axiosErrorHandler(err);
-        toast.error(message);
+      onError: (err: AxiosErrorResponseType) => {
+        toast.error(err.message);
       },
     }
   );
@@ -209,6 +201,7 @@ const Page = () => {
             <Image
               src={authImage}
               alt="Auth Image"
+              priority
               className="w-full h-full object-cover rounded-md"
             />
           </MotionImage>

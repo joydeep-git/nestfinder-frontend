@@ -12,10 +12,8 @@ import { MotionDiv, MotionHeading, MotionImage, MotionText } from "@/components/
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { AxiosError } from "axios";
-import { AxiosResponseType } from "@/types/index";
+import { AxiosErrorResponseType, AxiosSuccessResponseType } from "@/types/index";
 import { authService } from "@/services/authService";
-import { axiosErrorHandler } from "@/utils/helperFunctions";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { setUserState } from "@/redux/slices/authSlice";
 
@@ -24,6 +22,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+
 
 
 // Icons
@@ -60,7 +59,7 @@ const Page = ({ className }: { className?: string }) => {
 
 
 
-  const { handleSubmit, formState: { errors }, register } = useForm<LoginFormData>({
+  const { handleSubmit, formState: { errors }, register, resetField } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
@@ -69,27 +68,23 @@ const Page = ({ className }: { className?: string }) => {
   });
 
 
+
   // Mutation function
-  const { mutate, isLoading } = useMutation<AxiosResponseType, AxiosError, LoginFormData>(
-    async (data) => {
-      try {
-        return await authService.signIn(data);
-      } catch (err) {
-        throw err;
-      }
-    },
+  const { mutate, isLoading } = useMutation<AxiosSuccessResponseType, AxiosErrorResponseType, LoginFormData>(
+    async (data) =>  await authService.signIn(data),
     {
-      onSuccess: (data: AxiosResponseType) => {
-        toast.success(data?.data?.firstName ? `Welcome  ${data?.data?.firstName}` : "Logged in...");
+      onSuccess: (data: AxiosSuccessResponseType) => {
+        toast.success(data?.data?.firstName ? `Welcome  ${data?.data?.firstName.toUpperCase()}` : "Logged in...");
         dispatch(setUserState(data.data));
         router.push("/");
       },
-      onError: (err: AxiosError) => {
-        const message = axiosErrorHandler(err);
-        toast.error(message);
+      onError: (err) => {
+        toast.error(err.message);
+        resetField("password");
       },
     }
   );
+
 
 
   // send code
