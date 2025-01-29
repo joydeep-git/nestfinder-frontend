@@ -1,3 +1,4 @@
+import React from 'react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { useAppDispatch, useAppSelector } from '@/redux/store';
 import Image from 'next/image';
@@ -80,17 +81,17 @@ const UserDropdownMenu = () => {
           <DropdownMenuTrigger asChild className='cursor-pointer flex items-center justify-center overflow-hidden'>
             <Image src={user.avatar} alt={user?.firstName ?? "Image"} width={35} height={35} className='rounded-full overflow-hidden h-[35px] w-[35px] object-cover' priority />
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56 cursor-pointer gap-8">
+          <DropdownMenuContent className="w-56 cursor-pointer gap-8" >
 
             {
               dropdownOptions.map((option) => {
                 return (
-                  <>
-                    <DropdownMenuItem className='py-3 pl-3 gap-3' onClick={() => router.push(option.url)} key={option.title}>
+                  <React.Fragment key={option.title}>
+                    <DropdownMenuItem className='py-3 pl-3 gap-3' onClick={() => router.push(option.url)}>
                       { option.icon } {option.title}
                     </DropdownMenuItem>
                     <Separator />
-                  </>
+                  </ React.Fragment>
                 )
               })
             }
