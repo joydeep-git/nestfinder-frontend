@@ -80,7 +80,11 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
 
   // Checking Loading states
   if (isLoading || globalLoadingState) {
-    return <LoadingAnimation />;
+    return (
+      <div className={`relative h-screen w-screen ${darkMode ? "bg-[#121212]" : "bg-white"}`}>
+        <LoadingAnimation />
+      </div>
+    )
   }
 
 
