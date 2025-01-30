@@ -24,7 +24,7 @@ export interface MotionWrapperProps {
 
 
 // Redux States
-interface UserDataType extends UserProfileDataType {
+export interface UserDataType extends UserProfileDataType {
   _id: string;
   createdAt: string;
   updatedAt: string;
@@ -59,14 +59,6 @@ export type AuthReduxState = {
 
 
 
-// User Authentication Types
-// export type VerifyUserType = {
-//   isValid: boolean;
-//   success: true;
-//   data: UserDataType;
-// }
-
-
 
 // All API response Type
 export interface AxiosSuccessResponseType {
@@ -92,5 +84,24 @@ export interface DropdownOptionType {
   icon: ReactNode;
   title: string;
   url: string;
+}
+
+
+
+// All types of data
+export type CreateProductType = {
+  name: string;
+  description: string;
+  address: string;
+  regularPrice: number;
+  discountAmount: number;
+  bathrooms: number;
+  bedrooms: number;
+  furnished: boolean;
+  parking: boolean;
+  type: string;
+  offer: boolean;
+  imageUrls: string[];
+  userRef: string;
 }
 
