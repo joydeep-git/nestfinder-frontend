@@ -51,8 +51,8 @@ const UserDropdownMenu = () => {
     },
     {
       icon: <PlusCircle />,
-      title: 'Create New Property',
-      url: '/create-property',
+      title: 'Register new Property',
+      url: '/register-property',
     },
     {
       icon: <BrickWall />,
