@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import { motion } from "motion/react";
 
 
+
 // SVG Icon Props
 export interface IconProps {
   color?: string;
@@ -24,24 +25,6 @@ export interface MotionWrapperProps {
 
 
 // Redux States
-export interface UserDataType extends UserProfileDataType {
-  _id: string;
-  createdAt: string;
-  updatedAt: string;
-  _v: number;
-}
-
-
-export interface UserProfileDataType {
-  username: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  number: string;
-  avatar: string;
-}
-
-
 export interface UserProfileUpdateType {
   username: string;
   firstName: string;
@@ -59,13 +42,59 @@ export type AuthReduxState = {
 
 
 
+export interface UserProfileDataType extends UserProfileUpdateType {
+  email: string;
+  avatar: string;
+}
 
-// All API response Type
-export interface AxiosSuccessResponseType {
+export interface mongoDbAddedData {
+  _id: string;
+  createdAt: string;
+  updatedAt: string;
+  _v: number;
+}
+
+
+
+export interface UserDataType extends UserProfileDataType, mongoDbAddedData {};
+
+
+
+// Product Data Type
+export interface CreateProductType {
+  name: string;
+  description: string;
+  address: string;
+  regularPrice: number;
+  discountAmount: number;
+  bathrooms: number;
+  bedrooms: number;
+  furnished: boolean;
+  parking: boolean;
+  type: string;
+  offer: boolean;
+  imageUrls: string[];
+  userRef: string;
+}
+
+export interface ProductDataType extends CreateProductType, mongoDbAddedData { };
+
+
+
+// All Success API response Type
+export interface ApiSuccessType {
   success: true;
   message: string;
-  data: UserDataType;
 }
+
+export interface AuthSuccessType extends ApiSuccessType {
+  data: UserDataType
+}
+
+export interface ProductSuccessType extends ApiSuccessType {
+  data: ProductDataType
+}
+
 
 
 
@@ -86,22 +115,4 @@ export interface DropdownOptionType {
   url: string;
 }
 
-
-
-// All types of data
-export type CreateProductType = {
-  name: string;
-  description: string;
-  address: string;
-  regularPrice: number;
-  discountAmount: number;
-  bathrooms: number;
-  bedrooms: number;
-  furnished: boolean;
-  parking: boolean;
-  type: string;
-  offer: boolean;
-  imageUrls: string[];
-  userRef: string;
-}
 
