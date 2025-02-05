@@ -17,17 +17,17 @@ import { useMutation } from 'react-query';
 import { userService } from '@/services/userService';
 import { useAppDispatch } from '@/redux/store';
 import { logoutState } from '@/redux/slices/authSlice';
-import { AxiosErrorResponseType, AxiosSuccessResponseType } from '@/types/index';
+import { AxiosErrorResponseType, AuthSuccessType } from '@/types/index';
 import toast from 'react-hot-toast';
 
 
 
 const DeleteAccount = ({ id }: { id: string }) => {
-  
+
   const dispatch = useAppDispatch();
 
   // Run Delete Account
-  const { mutate } = useMutation<AxiosSuccessResponseType, AxiosErrorResponseType>(
+  const { mutate } = useMutation<AuthSuccessType, AxiosErrorResponseType>(
     () => userService.deleteProfile(id),
     {
       onSuccess: (data) => {
@@ -63,7 +63,7 @@ const DeleteAccount = ({ id }: { id: string }) => {
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
-      
+
     </AlertDialog>
   )
 }

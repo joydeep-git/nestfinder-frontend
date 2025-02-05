@@ -1,4 +1,4 @@
-import { AxiosSuccessResponseType } from "@/types/index.ts";
+import { AuthSuccessType } from "@/types/index.ts";
 import ApiService from "@/services/apiService";
 
 
@@ -10,13 +10,13 @@ class AuthService extends ApiService {
 
 
   // Verify token during loading
-  async verifyAuthToken(): Promise<AxiosSuccessResponseType> {
+  async verifyAuthToken(): Promise<AuthSuccessType> {
     return await this.api.get("/verify-token");
   };
 
 
 
-  async signIn({ email, password }: { email: string; password: string }): Promise<AxiosSuccessResponseType> {
+  async signIn({ email, password }: { email: string; password: string }): Promise<AuthSuccessType> {
     return await this.api.post(`/sign-in`, { email: email.toLowerCase(), password });
   };
 
@@ -36,7 +36,7 @@ class AuthService extends ApiService {
     password: string;
     number: string;
     avatar?: string;
-  }): Promise<AxiosSuccessResponseType> {
+  }): Promise<AuthSuccessType> {
     return await this.api.post(`/sign-up`, {
       firstName,
       lastName,
@@ -49,7 +49,7 @@ class AuthService extends ApiService {
 
 
 
-  async signOut(): Promise<AxiosSuccessResponseType> {
+  async signOut(): Promise<AuthSuccessType> {
     return await this.api.get(`/sign-out`);
   }
 

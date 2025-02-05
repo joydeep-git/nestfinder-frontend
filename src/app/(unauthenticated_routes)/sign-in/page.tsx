@@ -12,7 +12,7 @@ import { MotionDiv, MotionHeading, MotionImage, MotionText } from "@/components/
 import { useMutation } from "react-query";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { AxiosErrorResponseType, AxiosSuccessResponseType } from "@/types/index";
+import { AxiosErrorResponseType, AuthSuccessType } from "@/types/index";
 import { authService } from "@/services/authService";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { setUserState } from "@/redux/slices/authSlice";
@@ -70,10 +70,10 @@ const Page = ({ className }: { className?: string }) => {
 
 
   // Mutation function
-  const { mutate, isLoading } = useMutation<AxiosSuccessResponseType, AxiosErrorResponseType, LoginFormData>(
-    async (data) =>  await authService.signIn(data),
+  const { mutate, isLoading } = useMutation<AuthSuccessType, AxiosErrorResponseType, LoginFormData>(
+    async (data) => await authService.signIn(data),
     {
-      onSuccess: (data: AxiosSuccessResponseType) => {
+      onSuccess: (data: AuthSuccessType) => {
         toast.success(data?.data?.firstName ? `Welcome  ${data?.data?.firstName.toUpperCase()}` : "Logged in...");
         dispatch(setUserState(data.data));
         router.push("/");

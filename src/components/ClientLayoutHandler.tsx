@@ -4,7 +4,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { authService } from "@/services/authService";
 import { AxiosError } from "axios";
-import { AxiosSuccessResponseType } from "@/types/index";
+import { AuthSuccessType } from "@/types/index";
 import LoadingAnimation from "@/components/utils/LoadingAnimation";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { logoutState, setUserState, setDarkMode } from "@/redux/slices/authSlice";
@@ -28,10 +28,10 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
 
 
   // Verify token on every reload
-  const { mutate, isLoading } = useMutation<AxiosSuccessResponseType, AxiosError>(
+  const { mutate, isLoading } = useMutation<AuthSuccessType, AxiosError>(
     () => authService.verifyAuthToken(),
     {
-      onSuccess: (data: AxiosSuccessResponseType) => {
+      onSuccess: (data: AuthSuccessType) => {
         if (data.success) {
           dispatch(setUserState(data.data));
         } else {

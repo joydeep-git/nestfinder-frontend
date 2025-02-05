@@ -9,7 +9,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { MotionDiv, MotionHeading, MotionImage, MotionText } from "@/components/utils/motionWrapper";
 import { authService } from "@/services/authService";
-import { AxiosErrorResponseType, AxiosSuccessResponseType } from "@/types/index";
+import { AxiosErrorResponseType, AuthSuccessType } from "@/types/index";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
 import authImage from "@/assets/Images/auth-page.jpg";
@@ -53,7 +53,7 @@ const Page = () => {
 
 
   // Mutation function
-  const { mutate, isLoading } = useMutation<AxiosSuccessResponseType, AxiosErrorResponseType, SignupFormData>(
+  const { mutate, isLoading } = useMutation<AuthSuccessType, AxiosErrorResponseType, SignupFormData>(
     (data) => authService.signUp(data),
     {
       onSuccess: (data) => {

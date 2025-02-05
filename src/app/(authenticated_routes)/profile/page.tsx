@@ -23,7 +23,7 @@ import { Label } from "@/components/ui/label";
 import { Loader } from "lucide-react";
 import DeleteAccount from "@/app/(authenticated_routes)/profile/DeleteAccount";
 import { MotionHeading } from "@/components/utils/motionWrapper";
-import { AxiosSuccessResponseType } from "@/types/index";
+import { AuthSuccessType } from "@/types/index";
 
 // Zod Schema
 const profileSchema = z.object({
@@ -78,7 +78,7 @@ const ProfilePage = () => {
   const { mutate: imageMutate, isLoading: isImageLoading } = useMutation(
     async (file: File) => {
       const imageUrl = await firebaseService.getDownloadUrl({ file, folder: "profile" });
-      const userData: AxiosSuccessResponseType = await userService.updateProfilePicture({ avatar: imageUrl, id: user!._id });
+      const userData: AuthSuccessType = await userService.updateProfilePicture({ avatar: imageUrl, id: user!._id });
       dispatch(setUserState(userData.data));
     },
     {

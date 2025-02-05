@@ -6,7 +6,7 @@ import { BrickWall, Info, Loader, LogOut, PlusCircle, TableOfContents, User } fr
 import { useMutation } from 'react-query';
 import { authService } from '@/services/authService';
 import toast from 'react-hot-toast';
-import { AxiosSuccessResponseType, DropdownOptionType } from '@/types/index';
+import { AuthSuccessType, DropdownOptionType } from '@/types/index';
 import { logoutState } from '@/redux/slices/authSlice';
 import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
@@ -22,7 +22,7 @@ const UserDropdownMenu = () => {
 
 
   // Handler Logout
-  const { mutate: logout, isLoading } = useMutation<AxiosSuccessResponseType, AxiosError, void>(
+  const { mutate: logout, isLoading } = useMutation<AuthSuccessType, AxiosError, void>(
     async () => {
       return await authService.signOut();
     },
@@ -88,7 +88,7 @@ const UserDropdownMenu = () => {
                 return (
                   <React.Fragment key={option.title}>
                     <DropdownMenuItem className='py-3 pl-3 gap-3' onClick={() => router.push(option.url)}>
-                      { option.icon } {option.title}
+                      {option.icon} {option.title}
                     </DropdownMenuItem>
                     <Separator />
                   </ React.Fragment>
