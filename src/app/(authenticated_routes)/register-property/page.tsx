@@ -131,7 +131,9 @@ const CreateProperty = () => {
 
         toast.dismiss(loadingToast);
 
+        // clear the form
         resetForm();
+        setSelectedImages([]);
 
         return res;
 
