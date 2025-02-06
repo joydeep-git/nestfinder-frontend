@@ -96,6 +96,11 @@ export interface ProductSuccessType extends ApiSuccessType {
 }
 
 
+export interface MyProductsSuccessType extends ApiSuccessType {
+  data: ProductDataType[]
+}
+
+
 
 
 // Axios Error Types
