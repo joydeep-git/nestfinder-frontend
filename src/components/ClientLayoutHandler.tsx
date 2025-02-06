@@ -1,7 +1,7 @@
 "use client";
 
 import React, { ReactNode, useEffect, useState } from "react";
-import { useMutation } from "react-query";
+import { useQuery } from "react-query";
 import { authService } from "@/services/authService";
 import { AxiosError } from "axios";
 import { AuthSuccessType } from "@/types/index";
@@ -24,13 +24,19 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
   // Global Loading State
   const { user, isLoading: globalLoadingState, darkMode } = useAppSelector(state => state.auth);
 
+  // used for checking current page category
   const [isAuthPages, setIsAuthPages] = useState(false);
 
 
   // Verify token on every reload
-  const { mutate, isLoading } = useMutation<AuthSuccessType, AxiosError>(
+  const { refetch, isLoading } = useQuery<AuthSuccessType, AxiosError>(
+    ["verifyToken"],
     () => authService.verifyAuthToken(),
     {
+      enabled: false,
+      staleTime: Infinity,
+      cacheTime: Infinity,
+      retry: false,
       onSuccess: (data: AuthSuccessType) => {
         if (data.success) {
           dispatch(setUserState(data.data));
@@ -45,12 +51,8 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
     }
   );
 
-
-
-  // run verification token
-  useEffect(() => {
-    mutate();
-  }, [mutate]);
+  // call function on page load
+  useEffect(() => { refetch() }, [refetch]);
 
 
 
