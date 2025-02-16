@@ -31,5 +31,8 @@ const authSlice = createSlice({
   },
 });
 
+const authReducer = authSlice.reducer;
+
 export const { setUserState, logoutState, setLoadingState, setDarkMode } = authSlice.actions;
-export default authSlice.reducer;
+
+export default authReducer;

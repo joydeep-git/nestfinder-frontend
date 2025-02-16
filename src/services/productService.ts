@@ -8,13 +8,21 @@ class ProductService extends ApiService {
     super("/product");
   }
 
-  async createProduct({data, id} :{ data: CreateProductType; id: string; }): Promise<ProductSuccessType> {
+
+  async createProduct({ data, id }: { data: CreateProductType; id: string; }): Promise<ProductSuccessType> {
     return this.api.post(`/create/${id}`, data);
   }
+
+
+  async getProductDetails(id: string): Promise<ProductSuccessType> {
+    return this.api.get(`/get-product-details/${id}`);
+  }
+
 
   async getOwnerAllProducts(id: string): Promise<MyProductsSuccessType> {
     return this.api.get(`/owner-all-products/${id}`);
   }
+
 
   async deleteProduct({ userId, productId }: { userId: string; productId: string; }): Promise<ProductSuccessType> {
     return this.api.delete(`/delete-product/${userId}/${productId}`);

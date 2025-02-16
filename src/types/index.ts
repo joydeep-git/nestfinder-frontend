@@ -41,6 +41,16 @@ export type AuthReduxState = {
 }
 
 
+export type FilterReduxState = {
+  search: string;
+  type: "all" | "rent" | "sale";
+  parking: boolean;
+  furnished: boolean;
+  sort: "default" | "createdAt" | "regularPrice";
+  order: "default" | "asc" | "desc";
+}
+
+
 
 export interface UserProfileDataType extends UserProfileUpdateType {
   email: string;

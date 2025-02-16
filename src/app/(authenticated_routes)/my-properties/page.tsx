@@ -6,13 +6,16 @@ import { MotionDiv, MotionHeading, MotionText } from '@/components/utils/motionW
 import { useAppSelector } from '@/redux/store';
 import { productService } from '@/services/productService';
 import { AxiosErrorResponseType, MyProductsSuccessType } from '@/types/index';
-import { ChevronRight, Plus } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useQuery } from 'react-query';
-import DeleteProperty from './DeleteProperty';
+import PropertyCardMenu from "@/app/(authenticated_routes)/my-properties/PropertyCardMenu";
+import DeleteProperty from '@/app/(authenticated_routes)/my-properties/DeleteProperty';
+
+
 
 const MyProperties = () => {
 
@@ -69,18 +72,16 @@ const MyProperties = () => {
                           <Image className='rounded-md' src={val.imageUrls[0]} height={500} width={500} alt={val.name} priority={true} />
                         </div>
 
-                        <div className='p-4 flex flex-col' onClick={() => redirect(val._id)}>
+                        <div className='p-4 flex flex-col cursor-pointer' onClick={() => redirect(val._id)}>
 
                           <MotionHeading className='text-left' >{val.name}</MotionHeading>
                           <MotionText>{val.address}</MotionText>
 
                         </div>
 
-                        {/* <Separator /> */}
-
                         <div className='flex items-center justify-between py-1 px-4'>
                           <DeleteProperty userId={user!._id} productId={val._id} refetch={refetch} />
-                          <Button size={'sm'} onClick={() => redirect(val._id)} >View Details <ChevronRight /></Button>
+                          <PropertyCardMenu product={val} />
                         </div>
 
                       </Card>
@@ -92,8 +93,9 @@ const MyProperties = () => {
           )
           : <div className='flex-1'>
             <MotionText className='flex flex-col gap-6'>
-              <span>No property registered! </span>
-              <Button size={'sm'} onClick={() => router.push("register-property")}>Create One <ChevronRight /> </Button></MotionText>
+              <span>You have not registered any property! </span>
+              <Button size={'sm'} onClick={() => router.push("register-property")}>Create One <ChevronRight /> </Button>
+            </MotionText>
           </div>
       }
 
