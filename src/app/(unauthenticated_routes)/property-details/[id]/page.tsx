@@ -68,7 +68,7 @@ const PropertyDetails = () => {
         images.length > 0 && <ImageCarousal images={images} className='w-full lg:w-2/5 relative p-0 m-0 object-contain h-[300px] sm:h-[350px] md:h-[400px] lg:h-[450px] ' />
       }
 
-      <Card className='w-3/5 h-fit'>
+      <Card className='w-full lg:w-3/5 h-fit'>
 
         <CardHeader>
           <CardTitle>{property?.name}</CardTitle>
@@ -118,12 +118,12 @@ const PropertyDetails = () => {
           </div>
 
 
-          <div className='flex items-center gap-4'>
-            <Button size={'lg'} variant={'secondary'} disabled={!property.furnished}
+          <div className='flex flex-wrap items-center gap-4'>
+            <Button variant={'secondary'} disabled={!property.furnished}
               className={property.furnished ? "" : "line-through opacity-50 cursor-not-allowed"}>
               <Armchair /> Furnished
             </Button>
-            <Button size={'lg'} variant={'secondary'} disabled={!property.parking} className={!property.parking ? "line-through" : ""}> <CircleParking /> Parking </Button>
+            <Button variant={'secondary'} disabled={!property.parking} className={!property.parking ? "line-through" : ""}> <CircleParking /> Parking </Button>
           </div>
 
 

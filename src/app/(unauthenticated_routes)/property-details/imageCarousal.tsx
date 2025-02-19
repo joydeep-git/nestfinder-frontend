@@ -6,8 +6,8 @@ const ImageCarousal = ({ images, className = "" }: { images: { url: string }[]; 
       <SimpleImageSlider
         style={{ position: "relative", objectFit: "contain", margin: "0 auto" }}
         images={images}
-        showBullets={false}
-        showNavs={true}
+        showBullets={images.length > 1 ? true : false}
+        showNavs={images.length > 1 ? true : false} 
         width="100%"
         height="100%"
         navStyle={2}
