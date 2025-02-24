@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useQuery } from 'react-query';
 import { AxiosErrorResponseType, ProductDataType, ProductSuccessType } from '@/types/index';
@@ -36,11 +36,10 @@ const PropertyDetails = () => {
 
 
   // get property Details
-  const { isLoading } = useQuery<ProductSuccessType, AxiosErrorResponseType>(
+  const { isLoading, refetch  } = useQuery<ProductSuccessType, AxiosErrorResponseType>(
     ['propertyDetails', id],
     () => productService.getProductDetails(id?.toString() || ''),
     {
-      enabled: !!id,
       staleTime: Infinity,
       cacheTime: Infinity,
       retry: false,
@@ -54,6 +53,12 @@ const PropertyDetails = () => {
       },
     }
   );
+
+
+  // fetch property on page load
+  useEffect(() => {
+    refetch();
+  }, [id, refetch]);
 
 
   // checking if user is property owner
