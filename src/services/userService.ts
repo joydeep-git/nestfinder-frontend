@@ -8,6 +8,11 @@ class UserService extends ApiService {
     super("/user");
   }
 
+  // Get User Details
+  async getUserDetails(id: string): Promise<AuthSuccessType> {
+    return await this.api.get(`/get-user/${id}`);
+  }
+
 
   // Update User Details
   async updateDetails({ user, id }: { id: string; user: UserProfileUpdateType }): Promise<AuthSuccessType> {
