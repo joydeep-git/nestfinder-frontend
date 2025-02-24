@@ -77,9 +77,11 @@ const ProfilePage = () => {
   // Image upload mutation
   const { mutate: imageMutate, isLoading: isImageLoading } = useMutation(
     async (file: File) => {
+      const toastID = toast.loading("Updating Image...");
       const imageUrl = await firebaseService.getDownloadUrl({ file, folder: "profile" });
       const userData: AuthSuccessType = await userService.updateProfilePicture({ avatar: imageUrl, id: user!._id });
       dispatch(setUserState(userData.data));
+      toast.dismiss(toastID);
     },
     {
       onSuccess: (data) => {
@@ -97,8 +99,12 @@ const ProfilePage = () => {
 
 
   // Handle Image change
-  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) imageMutate(e.target.files[0]);
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      imageMutate(e.target.files[0]);
+    } else {
+      toast.error("No file selected!");
+    }
   };
 
 
