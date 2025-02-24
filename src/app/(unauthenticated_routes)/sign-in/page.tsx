@@ -76,7 +76,7 @@ const Page = ({ className }: { className?: string }) => {
       onSuccess: (data: AuthSuccessType) => {
         toast.success(data?.data?.firstName ? `Welcome  ${data?.data?.firstName.toUpperCase()}` : "Logged in...");
         dispatch(setUserState(data.data));
-        router.push("/");
+        router.push("/profile");
       },
       onError: (err) => {
         toast.error(err.message);
