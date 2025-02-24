@@ -51,9 +51,8 @@ const DeleteAccount = ({ id }: { id: string }) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+          <AlertDialogDescription className='font-semibold text-lg text-red-500'>
+            This will permanently delete your ACCOUNT and all your REGISTERED PROPERTIES.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
