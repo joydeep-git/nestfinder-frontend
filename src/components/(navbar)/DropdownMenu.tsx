@@ -3,12 +3,11 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { useAppDispatch, useAppSelector } from '@/redux/store';
 import Image from 'next/image';
 import { BrickWall, Info, Loader, LogOut, PlusCircle, TableOfContents, User } from 'lucide-react';
-import { useMutation } from 'react-query';
+import { useMutation } from "react-query";
 import { authService } from '@/services/authService';
 import toast from 'react-hot-toast';
-import { AuthSuccessType, DropdownOptionType } from '@/types/index';
+import { AuthSuccessType, AxiosErrorResponseType, DropdownOptionType } from '@/types/index';
 import { logoutState } from '@/redux/slices/authSlice';
-import { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { Separator } from '../ui/separator';
 
@@ -22,7 +21,7 @@ const UserDropdownMenu = () => {
 
 
   // Handler Logout
-  const { mutate: logout, isLoading } = useMutation<AuthSuccessType, AxiosError, void>(
+  const { mutate: logout, isLoading } = useMutation<AuthSuccessType, AxiosErrorResponseType, void>(
     async () => {
       return await authService.signOut();
     },
@@ -33,8 +32,7 @@ const UserDropdownMenu = () => {
           toast.success(data.message || 'Logged out successfully.');
         }
       },
-      onError: (err: AxiosError) => {
-        console.log(err);
+      onError: (err: AxiosErrorResponseType) => {
         toast.error(err?.message);
       },
     }

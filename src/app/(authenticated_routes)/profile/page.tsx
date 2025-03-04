@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { useMutation } from "react-query";
-import { AxiosError } from "axios";
 
 // Redux and Services
 import { useAppDispatch, useAppSelector } from "@/redux/store";
@@ -23,7 +22,7 @@ import { Label } from "@/components/ui/label";
 import { Loader } from "lucide-react";
 import DeleteAccount from "@/app/(authenticated_routes)/profile/DeleteAccount";
 import { MotionHeading } from "@/components/utils/motionWrapper";
-import { AuthSuccessType } from "@/types/index";
+import { AuthSuccessType, AxiosErrorResponseType } from "@/types/index";
 
 // Zod Schema
 const profileSchema = z.object({
@@ -55,16 +54,15 @@ const ProfilePage = () => {
   });
 
   // Profile update mutation
-  const { mutate: profileMutate, isLoading: profileLoading } = useMutation(
-    (data: ProfileFormData) =>
-      userService.updateDetails({ id: user?._id ?? "", user: data }),
+  const { mutate: profileMutate, isLoading: profileLoading } = useMutation<AuthSuccessType, AxiosErrorResponseType, ProfileFormData>(
+    async (data) => await userService.updateDetails({ id: user?._id ?? "", user: data }),
     {
       onSuccess: (data) => {
         toast.success("Profile updated successfully!");
-        dispatch(setUserState(data?.data));
+        dispatch(setUserState(data.data));
         setIsEditing(false);
       },
-      onError: (err: AxiosError) => {
+      onError: (err: AxiosErrorResponseType) => {
         const message = err?.message;
         toast.error(message);
       },

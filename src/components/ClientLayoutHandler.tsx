@@ -3,8 +3,7 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { authService } from "@/services/authService";
-import { AxiosError } from "axios";
-import { AuthSuccessType } from "@/types/index";
+import { AuthSuccessType, AxiosErrorResponseType } from "@/types/index";
 import LoadingAnimation from "@/components/utils/LoadingAnimation";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { logoutState, setUserState, setDarkMode } from "@/redux/slices/authSlice";
@@ -29,7 +28,7 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
 
 
   // Verify token on every reload
-  const { refetch, isLoading } = useQuery<AuthSuccessType, AxiosError>(
+  const { refetch, isLoading } = useQuery<AuthSuccessType, AxiosErrorResponseType>(
     ["verifyToken"],
     () => authService.verifyAuthToken(),
     {

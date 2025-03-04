@@ -13,7 +13,7 @@ import {
 import cookie from "browser-cookies";
 
 import { Button } from '@/components/ui/button';
-import { useMutation } from 'react-query';
+import { useMutation } from "react-query";
 import { userService } from '@/services/userService';
 import { useAppDispatch } from '@/redux/store';
 import { logoutState } from '@/redux/slices/authSlice';

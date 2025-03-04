@@ -11,7 +11,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { useQuery } from 'react-query';
+import { useQuery } from "react-query";
 import PropertyCardMenu from "@/app/(authenticated_routes)/my-properties/PropertyCardMenu";
 import DeleteProperty from '@/app/(authenticated_routes)/my-properties/DeleteProperty';
 
@@ -50,7 +50,7 @@ const MyProperties = () => {
   const redirect = (id: string) => {
     router.push(`property-details/${id}`)
   }
-  
+
 
 
   return (

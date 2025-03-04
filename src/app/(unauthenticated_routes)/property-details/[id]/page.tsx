@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { useQuery } from 'react-query';
+import { useQuery } from "react-query";
 import { AxiosErrorResponseType, ProductDataType, ProductSuccessType } from '@/types/index';
 import { productService } from '@/services/productService';
 
@@ -15,6 +15,7 @@ import { Button } from '@/components/ui/button';
 import LoadingAnimation from '@/components/utils/LoadingAnimation';
 import toast from 'react-hot-toast';
 import { useAppSelector } from '@/redux/store';
+import PropertyOwnerDetails from '@/components/propertyOwnerDetails';
 
 
 const PropertyDetails = () => {
@@ -23,7 +24,7 @@ const PropertyDetails = () => {
   const router = useRouter();
 
   // Get property ID
-  const { id } = useParams<{ id: string }>(); 
+  const { id } = useParams<{ id: string }>();
 
 
   // Current user data
@@ -36,7 +37,7 @@ const PropertyDetails = () => {
 
 
   // get property Details
-  const { isLoading, refetch  } = useQuery<ProductSuccessType, AxiosErrorResponseType>(
+  const { isLoading, refetch } = useQuery<ProductSuccessType, AxiosErrorResponseType>(
     ['propertyDetails', id],
     () => productService.getProductDetails(id?.toString() || ''),
     {
@@ -135,10 +136,11 @@ const PropertyDetails = () => {
           {
             !user
               ? <Button className='w-fit' onClick={() => router.push("/sign-in")}>Login to see owner details</Button>
-              : <Button className='w-fit'
-                onClick={() => router.push( isOwner ? `/edit-property/${property._id}` : `/contact-owner/${property.userRef}`)}>
-                {isOwner ? "Edit Property" : "Contact Owner"}
-              </Button>
+              : (
+                isOwner
+                  ? <Button onClick={() => router.push(`/edit-property/${property._id}`)}>Edit Property</Button>
+                  : <PropertyOwnerDetails id={property.userRef} />
+              )
           }
 
         </CardContent>
@@ -148,6 +150,5 @@ const PropertyDetails = () => {
     </div>
   )
 }
-
 
 export default PropertyDetails;
