@@ -14,6 +14,11 @@ class ProductService extends ApiService {
   }
 
 
+  async editProduct({ data, userId, productId }: { data: CreateProductType; userId: string; productId: string; }): Promise<ProductSuccessType>{
+    return this.api.post(`/edit/${userId}/${productId}`, data);
+  }
+
+
   async getProductDetails(id: string): Promise<ProductSuccessType> {
     return this.api.get(`/get-product-details/${id}`);
   }

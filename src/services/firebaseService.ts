@@ -20,23 +20,37 @@ class FirebaseService {
 
   private storage = getStorage(this.app);
 
-  public async getDownloadUrl({ file, folder }: { file: File; folder: "profile" | "property" }) {
+  async getDownloadUrl({ file, folder }: { file: File; folder: "profile" | "property" }) {
     try {
 
       const imgName = `${folder === "profile" ? "profile_images" : "property_images"}/${new Date().getTime()}_${file.name}`;
 
-      const storageRef = ref( this.storage , imgName);
+      const storageRef = ref(this.storage, imgName);
 
       const uploadImg = await uploadBytes(storageRef, file);
 
       const url = await getDownloadURL(uploadImg.ref);
-      
+
       return url;
-      
+
     } catch (error) {
       throw error;
     }
   }
+
+
+  // async deleteFirebaseImage(url: string) {
+
+  //   try {
+
+  //     const delRef = ref(this.storage, url);
+  //     await deleteObject(delRef).then(data => console.log("Object Deleted!", data));
+
+  //   } catch (err) {
+  //     throw err;
+  //   }
+
+  // }
 
 }
 

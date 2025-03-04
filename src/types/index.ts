@@ -81,7 +81,7 @@ export interface CreateProductType {
   bedrooms: number;
   furnished: boolean;
   parking: boolean;
-  type: string;
+  type: "sell" | "rent";
   offer: boolean;
   imageUrls: string[];
   userRef: string;
