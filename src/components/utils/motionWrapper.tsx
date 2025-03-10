@@ -30,6 +30,31 @@ export const MotionDiv = ({
 
 
 
+export const MotionLayoutDiv = ({
+  className,
+  children,
+  initial = { opacity: 0, y: 20 },
+  animate = { opacity: 1, y: 0 },
+  transition = { duration: 0.5 },
+}: MotionWrapperProps): ReactNode => {
+  return (
+    <motion.div
+      layout
+      initial={initial}
+      animate={animate}
+      transition={transition}
+      className={cn(
+        "p-4 h-full max-w-screen-xl overflow-y-auto overflow-x-hidden",
+        className
+      )}
+    >
+      {children}
+    </motion.div>
+  );
+};
+
+
+
 
 export const MotionHeading = ({
   children,
@@ -37,12 +62,14 @@ export const MotionHeading = ({
   initial = { opacity: 0, scale: 0.9 },
   animate = { opacity: 1, scale: 1 },
   transition = { delay: 0.2 },
+  whileHover = { scale: 1.05 },
 }: MotionWrapperProps): ReactNode => {
   return (
     <motion.h1
       initial={initial}
       animate={animate}
       transition={transition}
+      whileHover={whileHover}
       className={cn("font-bold text-xl md:text-2xl text-center ", className)}
     >
       {children}
