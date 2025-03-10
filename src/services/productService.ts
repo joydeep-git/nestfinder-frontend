@@ -1,5 +1,5 @@
 import ApiService from "@/services/apiService";
-import { CreateProductType, MyProductsSuccessType, ProductSuccessType } from "@/types/index";
+import { CreateProductType, multipleProductsSuccessType, ProductSuccessType } from "@/types/index";
 
 
 class ProductService extends ApiService {
@@ -24,7 +24,7 @@ class ProductService extends ApiService {
   }
 
 
-  async getOwnerAllProducts(id: string): Promise<MyProductsSuccessType> {
+  async getOwnerAllProducts(id: string): Promise<multipleProductsSuccessType> {
     return this.api.get(`/owner-all-products/${id}`);
   }
 
@@ -33,6 +33,9 @@ class ProductService extends ApiService {
     return this.api.delete(`/delete-product/${userId}/${productId}`);
   }
 
+  async getProducts(searchParam: string): Promise<multipleProductsSuccessType> {
+    return this.api.get(`/get-all-products?${searchParam.toString()}`);
+  }
 
 }
 
