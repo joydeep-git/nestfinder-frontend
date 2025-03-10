@@ -10,6 +10,7 @@ import { logoutState, setUserState, setDarkMode } from "@/redux/slices/authSlice
 import cookies from "browser-cookies";
 import { usePathname, useRouter } from "next/navigation";
 import Navbar from "./(navbar)/Navbar";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 
 const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
@@ -89,8 +90,11 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
   }
 
 
+  const client: QueryClient = new QueryClient();
+
 
   return (
+    <QueryClientProvider client={client}>
     <main className="flex flex-col h-screen">
 
       {!isAuthPages && <Navbar />}
@@ -98,7 +102,8 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
       <div className={`flex-1 ${!isAuthPages && "pt-14"}`}>
         {children}
       </div>
-    </main>
+      </main>
+    </QueryClientProvider>
   );
 };
 
