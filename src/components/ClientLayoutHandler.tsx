@@ -95,13 +95,13 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
 
   return (
     <QueryClientProvider client={client}>
-    <main className="flex flex-col h-screen">
+      <main className="flex flex-col h-screen">
 
-      {!isAuthPages && <Navbar />}
+        {!isAuthPages && <Navbar />}
 
-      <div className={`flex-1 ${!isAuthPages && "pt-14"}`}>
-        {children}
-      </div>
+        <div className={`flex-1 ${!isAuthPages && "pt-14"}`}>
+          {children}
+        </div>
       </main>
     </QueryClientProvider>
   );
