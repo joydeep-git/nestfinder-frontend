@@ -20,6 +20,7 @@ export interface MotionWrapperProps {
   animate?: Parameters<typeof motion.div>[0]['animate'];
   initial?: Parameters<typeof motion.div>[0]['initial'];
   transition?: Parameters<typeof motion.div>[0]['transition'];
+  whileHover?: Parameters<typeof motion.div>[0]['whileHover'];
 }
 
 
@@ -106,7 +107,7 @@ export interface ProductSuccessType extends ApiSuccessType {
 }
 
 
-export interface MyProductsSuccessType extends ApiSuccessType {
+export interface multipleProductsSuccessType extends ApiSuccessType {
   data: ProductDataType[]
 }
 
