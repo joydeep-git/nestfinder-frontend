@@ -13,6 +13,7 @@ import { useQuery } from "react-query";
 import PropertyCardMenu from "@/app/(authenticated_routes)/my-properties/PropertyCardMenu";
 import DeleteProperty from '@/app/(authenticated_routes)/my-properties/DeleteProperty';
 import ProductCard from '@/components/ProductCard';
+import LoadingAnimation from '@/components/utils/LoadingAnimation';
 
 
 
@@ -27,7 +28,7 @@ const MyProperties = () => {
 
 
   // mutation function
-  const { refetch, data: allProperties } = useQuery<multipleProductsSuccessType, AxiosErrorResponseType>(
+  const { refetch, data: allProperties, isLoading } = useQuery<multipleProductsSuccessType, AxiosErrorResponseType>(
     ['ownerAllProducts', user!._id],
     async () => await productService.getOwnerAllProducts(user!._id.toString()),
     {
@@ -45,6 +46,7 @@ const MyProperties = () => {
   }, [refetch]);
 
 
+  if(isLoading) return <LoadingAnimation />
 
   return (
     <MotionDiv className='pt-6 pb-12 max-w-screen-2xl'>
