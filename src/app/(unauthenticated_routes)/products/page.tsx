@@ -6,6 +6,7 @@ import { productService } from '@/services/productService';
 import { useSearchParams } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
 import { MotionLayoutDiv } from '@/components/utils/motionWrapper';
+import LoadingAnimation from '@/components/utils/LoadingAnimation';
 
 const Products = () => {
 
@@ -13,13 +14,14 @@ const Products = () => {
   const searchParams = useSearchParams();
 
   // fetch products
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['products', searchParams.toString()],
     queryFn: async () => await productService.getProducts(searchParams.toString()),
     enabled: !!searchParams,
   });
 
 
+  if(isLoading) return <LoadingAnimation />
 
   return (
     <MotionLayoutDiv className='items-center md:items-start justify-start flex-wrap flex-row w-full flex-1 mx-auto flex gap-6'>
