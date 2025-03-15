@@ -12,7 +12,8 @@ import { MoveRight, Search, Share2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { MouseEvent, useState } from "react";
+import toast from "react-hot-toast";
 
 
 
@@ -45,6 +46,14 @@ const Page = () => {
     queryFn: async () => await productService.getProducts(""),
     enabled: true,
   });
+
+
+  // copy value in clipboard
+  const handleCopy = (e: MouseEvent<HTMLButtonElement>, id:string) => {
+    e.preventDefault();
+    navigator.clipboard.writeText(`${window.location.origin}/property-details/${id}`);
+    toast.success("Link copied to clipboard");
+  }
 
 
   return (
@@ -171,7 +180,7 @@ const Page = () => {
                               <h3 className="font-bold text-lg">${property.regularPrice - property.discountAmount}</h3>
                               <p className="text-card-foreground">{property.name}</p>
                             </div>
-                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={(e) => handleCopy(e, property._id)}>
                               <Share2 className="h-4 w-4" />
                             </Button>
                           </div>
