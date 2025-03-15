@@ -3,7 +3,14 @@ import React from 'react';
 const LoadingAnimation = () => {
 
   return (
-    <div className="loadingAnimation"></div>
+    <div className="spinner">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   )
 }
 
