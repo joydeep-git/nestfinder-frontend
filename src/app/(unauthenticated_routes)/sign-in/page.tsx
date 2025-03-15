@@ -6,7 +6,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import authImage from "@/assets/Images/auth-page.jpg";
 import { z } from "zod";
-import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { MotionDiv, MotionHeading, MotionImage, MotionText } from "@/components/utils/motionWrapper";
 import { useMutation } from "react-query";
@@ -38,7 +37,7 @@ const loginSchema = z.object({
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
-const Page = ({ className }: { className?: string }) => {
+const SignIn = () => {
 
   const dispatch = useAppDispatch();
 
@@ -97,7 +96,7 @@ const Page = ({ className }: { className?: string }) => {
   return (
     <MotionDiv className="h-full items-center justify-center overflow-y-auto relative">
 
-      <div className={cn("flex flex-col gap-6 w-full max-w-sm md:max-w-3xl", className)}>
+      <div className="flex flex-col gap-6 w-full max-w-sm md:max-w-3xl">
         <Card className="overflow-hidden shadow-xl">
           <CardContent className="grid gap-4 p-4 sm:p-6 md:grid-cols-2 md:p-0">
             <form className="p-6 md:p-8" onSubmit={handleSubmit(onSubmit)}>
@@ -200,4 +199,4 @@ const Page = ({ className }: { className?: string }) => {
   );
 };
 
-export default Page;
+export default SignIn;
