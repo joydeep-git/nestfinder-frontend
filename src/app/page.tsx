@@ -166,7 +166,7 @@ const Page = () => {
                 ? [1, 2, 3].map((i) => <SkeletonCard key={i} />)
                 : data?.data.slice(0, 3).map((property) => {
                   return (
-                    <Link href={`/products/${property._id}`} key={property._id}>
+                    <Link href={`/property-details/${property._id}`} key={property._id}>
                       <Card className="overflow-hidden hover:shadow-lg transition">
                         <div className="aspect-video relative bg-muted">
                           <div className="absolute top-2 left-2 bg-primary px-2 py-1 rounded text-xs text-primary-foreground font-medium">
