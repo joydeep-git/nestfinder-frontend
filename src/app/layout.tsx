@@ -20,7 +20,7 @@ const RootLayout = ({ children }: { children: Readonly<ReactNode> }) => {
       <body className={`antialiased`}>
         <StoreProvider>
           <ClientLayoutHandler>{children}</ClientLayoutHandler>
-          <Toaster position="top-right" reverseOrder={false} />
+          <Toaster position="top-center" reverseOrder={false} />
         </StoreProvider>
       </body>
     </html >
