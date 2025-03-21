@@ -54,7 +54,7 @@ const MyProperties = () => {
 
       {allProperties && allProperties?.data.length > 0 ? (
         <div className='flex-1 w-full'>
-          <div className='mx-auto flex flex-wrap items-start justify-start gap-6 w-fit'>
+          <div className='mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6'>
             {allProperties?.data.map((property: ProductDataType) => (
               <ProductCard
                 key={property._id}
