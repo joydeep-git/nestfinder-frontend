@@ -4,6 +4,7 @@ import StoreProvider from "./StoreProvider";
 import { Toaster } from "react-hot-toast";
 import { ReactNode } from "react";
 import ClientLayoutHandler from "../components/ClientLayoutHandler";
+import { Analytics } from '@vercel/analytics/next';
 
 
 
@@ -22,6 +23,7 @@ const RootLayout = ({ children }: { children: Readonly<ReactNode> }) => {
           <ClientLayoutHandler>{children}</ClientLayoutHandler>
           <Toaster position="top-center" reverseOrder={false} />
         </StoreProvider>
+        <Analytics />
       </body>
     </html >
   );
