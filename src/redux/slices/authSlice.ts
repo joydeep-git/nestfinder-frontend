@@ -1,6 +1,5 @@
 import { AuthReduxState, UserDataType } from '@/types/index.ts';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import cookies from "browser-cookies";
 
 
 const initialState: AuthReduxState = {
@@ -20,7 +19,6 @@ const authSlice = createSlice({
     logoutState: (state) => {
       state.user = null;
       state.isLoading = false;
-      cookies.erase("token");
     },
     setLoadingState: (state, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;

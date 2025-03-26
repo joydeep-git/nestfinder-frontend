@@ -10,7 +10,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import cookie from "browser-cookies";
 
 import { Button } from '@/components/ui/button';
 import { useMutation } from "react-query";
@@ -31,7 +30,6 @@ const DeleteAccount = ({ id }: { id: string }) => {
     () => userService.deleteProfile(id),
     {
       onSuccess: (data) => {
-        cookie.erase("token");
         toast.success(data.message);
         dispatch(logoutState());
       },

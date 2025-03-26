@@ -7,7 +7,6 @@ import { AuthSuccessType, AxiosErrorResponseType } from "@/types/index";
 // import LoadingAnimation from "@/components/utils/LoadingAnimation";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { logoutState, setUserState, setDarkMode } from "@/redux/slices/authSlice";
-import cookies from "browser-cookies";
 import { usePathname, useRouter } from "next/navigation";
 import Navbar from "./(navbar)/Navbar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -46,7 +45,6 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
       },
       onError: () => {
         dispatch(logoutState());
-        cookies.erase("token", { path: "/" });
       },
     }
   );
