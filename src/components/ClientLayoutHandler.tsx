@@ -4,7 +4,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { authService } from "@/services/authService";
 import { AuthSuccessType, AxiosErrorResponseType } from "@/types/index";
-import LoadingAnimation from "@/components/utils/LoadingAnimation";
+// import LoadingAnimation from "@/components/utils/LoadingAnimation";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { logoutState, setUserState, setDarkMode } from "@/redux/slices/authSlice";
 import cookies from "browser-cookies";
@@ -22,14 +22,14 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
 
 
   // Global Loading State
-  const { user, isLoading: globalLoadingState, darkMode } = useAppSelector(state => state.auth);
+  const { user, darkMode } = useAppSelector(state => state.auth);
 
   // used for checking current page category
   const [isAuthPages, setIsAuthPages] = useState(false);
 
 
   // Verify token on every reload
-  const { refetch, isLoading } = useQuery<AuthSuccessType, AxiosErrorResponseType>(
+  const { refetch } = useQuery<AuthSuccessType, AxiosErrorResponseType>(
     ["verifyToken"],
     () => authService.verifyAuthToken(),
     {
@@ -81,13 +81,13 @@ const ClientLayoutHandler = ({ children }: { children: ReactNode }) => {
 
 
   // Checking Loading states
-  if (isLoading || globalLoadingState) {
-    return (
-      <div className={`relative h-screen w-screen ${darkMode ? "bg-[#121212]" : "bg-white"}`}>
-        <LoadingAnimation />
-      </div>
-    )
-  }
+  // if (isLoading || globalLoadingState) {
+  //   return (
+  //     <div className={`relative h-screen w-screen ${darkMode ? "bg-[#121212]" : "bg-white"}`}>
+  //       <LoadingAnimation />
+  //     </div>
+  //   )
+  // }
 
 
   const client: QueryClient = new QueryClient();
