@@ -58,7 +58,7 @@ const SignIn = () => {
 
 
 
-  const { handleSubmit, formState: { errors }, register, resetField } = useForm<LoginFormData>({
+  const { handleSubmit, formState: { errors }, register, resetField, setValue } = useForm<LoginFormData>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
@@ -83,6 +83,15 @@ const SignIn = () => {
       },
     }
   );
+
+
+  // fill demo data in fields
+  const demoLogin = () => {
+    setValue("email", "test@email.com");
+    setValue("password", "123456");
+
+    handleSubmit(onSubmit)();
+  }
 
 
 
@@ -152,16 +161,25 @@ const SignIn = () => {
                 {/* Submit Button */}
                 <motion.div
                   whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
+                  whileTap={{ scale: 0.98 }}>
                   <Button type="submit" className="w-full" disabled={isLoading}>
                     {isLoading ? "Loading..." : "Login"}
                   </Button>
                 </motion.div>
 
+
+                {/* fill demo credentials */}
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="flex gap-6 items-center flex-col">
+                  <Button type="button" className="w-full" variant={"outline"} onClick={() => demoLogin()}>Login with Demo Account</Button>
+                </motion.div>
+
+
                 {/* Signup Link */}
-                <div>
-                  Don&apos;t have an account?{" "}
+                <div className="flex gap-0 items-center whitespace-nowrap">
+                  <span>Don&apos;t have an account?{" "}</span>
                   <Button type="button" disabled={isLoading} variant="link" onClick={() => router.push("/sign-up")}>
                     Sign Up
                   </Button>
