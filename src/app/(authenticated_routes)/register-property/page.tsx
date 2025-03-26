@@ -90,7 +90,16 @@ const CreateProperty = () => {
   // store values in imageUrls
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
+
     if (!files || files.length === 0) return;
+
+    for (const file of files) {
+      if (file.size > 2000000) { // 2MB
+        toast.error("Images should be less than 2 MB.");
+        e.target.value = "";
+        return;
+      }
+    }
 
     const newImages = Array.from(files).map(file => ({
       file,
