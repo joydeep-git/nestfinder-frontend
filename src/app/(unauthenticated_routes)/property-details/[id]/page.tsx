@@ -7,7 +7,7 @@ import { AxiosErrorResponseType, ProductDataType, ProductSuccessType } from '@/t
 import { productService } from '@/services/productService';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Armchair, Bath, BedDouble, CircleParking, MapPin, Share2 } from 'lucide-react';
+import { Armchair, Bath, BedDouble, CircleParking, MapPin, Share2, SquareArrowLeft } from 'lucide-react';
 import ImageCarousal from '../imageCarousal';
 import { Button } from '@/components/ui/button';
 import LoadingAnimation from '@/components/utils/LoadingAnimation';
@@ -76,6 +76,11 @@ const PropertyDetails = () => {
 
   return (
     <div className='flex flex-col lg:flex-row max-w-screen-2xl mx-auto h-full overflow-auto justify-start gap-8 p-8'>
+
+      <SquareArrowLeft className="cursor-pointer hover:opacity-60"
+        height={30} width={30}
+        onClick={() => router.back()} />
+
       <div className='w-full lg:w-2/5'>
         {/* Property Images */}
         {images.length > 0 && (
