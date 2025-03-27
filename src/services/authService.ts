@@ -50,7 +50,7 @@ class AuthService extends ApiService {
 
 
   async signOut(): Promise<AuthSuccessType> {
-    return await this.api.get(`/sign-out`);
+    return await this.api.get(`/sign-out`, { withCredentials: true });
   }
 
 
