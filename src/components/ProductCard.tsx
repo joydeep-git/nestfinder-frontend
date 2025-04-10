@@ -1,14 +1,15 @@
 "use client";
 
-import React, { ReactNode } from 'react';
+import React, { MouseEvent, ReactNode } from 'react';
 import { Card } from '@/components/ui/card';
 import { MotionHeading, MotionText } from '@/components/utils/motionWrapper';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
-import { MapPin, Bed, Bath } from 'lucide-react';
+import { MapPin, Bed, Bath, Share2 } from 'lucide-react';
 import { ProductDataType } from '../types';
 import { useRouter } from 'next/navigation';
 import { Button } from './ui/button';
+import toast from 'react-hot-toast';
 
 const ProductCard = ({ property, children }: { property: ProductDataType; children?: ReactNode; }) => {
   const router = useRouter();
@@ -22,6 +23,16 @@ const ProductCard = ({ property, children }: { property: ProductDataType; childr
   const routerFn = () => {
     router.push(`/property-details/${property._id}`);
   };
+
+
+  // copy value in clipboard
+  const handleCopy = (e: MouseEvent<HTMLButtonElement>, id: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    navigator.clipboard.writeText(`${window.location.origin}/property-details/${id}`);
+    toast.success("Link copied to clipboard");
+  }
+
 
   return (
     <Card
@@ -52,10 +63,16 @@ const ProductCard = ({ property, children }: { property: ProductDataType; childr
             Save ${property.discountAmount}
           </Badge>
         )}
+
+        <Button onClick={(e) => handleCopy(e, property._id)} size={"sm"} variant={"secondary"} className='p-2.5 rounded-full absolute right-4 bottom-4' >
+          <Share2 className='h-4 w-4' />
+        </Button>
+
       </div>
 
       {/* Property Details - Set to grow and fill available space */}
       <div className="p-5 flex flex-col cursor-pointer space-y-3 flex-grow" onClick={routerFn}>
+
         <MotionHeading
           className="text-left text-xl font-bold truncate max-w-full line-clamp-1"
           whileHover={{ x: 3 }}
@@ -107,7 +124,7 @@ const ProductCard = ({ property, children }: { property: ProductDataType; childr
             : <Badge variant="outline" className="bg-primary-foreground text-primary line-through text-xs border-red-200">
               Furnished
             </Badge>
-            }
+          }
           {property.parking ?
             <Badge variant="outline" className="bg-green-50 text-green-600 text-xs border-green-100">
               Parking
