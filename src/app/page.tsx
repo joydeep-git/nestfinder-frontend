@@ -1,19 +1,17 @@
 "use client";
 
 import Footer from "@/components/Footer";
+import ProductCard from "@/components/ProductCard";
 import SkeletonCard from "@/components/SkeletonCard";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { productService } from "@/services/productService";
 import { useQuery } from "@tanstack/react-query";
-import { MoveRight, Search, Share2 } from "lucide-react";
-import Image from "next/image";
+import { MoveRight, Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { MouseEvent, useState } from "react";
-import toast from "react-hot-toast";
+import { useState } from "react";
 
 
 
@@ -46,14 +44,6 @@ const Page = () => {
     queryFn: async () => await productService.getProducts(""),
     enabled: true,
   });
-
-
-  // copy value in clipboard
-  const handleCopy = (e: MouseEvent<HTMLButtonElement>, id:string) => {
-    e.preventDefault();
-    navigator.clipboard.writeText(`${window.location.origin}/property-details/${id}`);
-    toast.success("Link copied to clipboard");
-  }
 
 
   return (
@@ -94,61 +84,15 @@ const Page = () => {
                 <Button size="lg" className="w-full md:w-auto" onClick={() => handleSearch()}>
                   Search
                 </Button>
+
+                <Button size="lg" type="button" variant={"outline"} className="w-full md:w-auto text-primary" onClick={() => router.push("/products")}>
+                  All Products
+                </Button>
               </div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Feature Categories */}
-      {/* <section className="py-12 bg-muted/50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-2xl font-bold text-center mb-8">Browse by Property Type</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="hover:shadow-lg transition cursor-pointer">
-              <CardContent className="p-6 flex flex-col items-center">
-                <Home className="h-12 w-12 text-primary mb-4" />
-                <h3 className="text-lg font-medium">Houses</h3>
-                <p className="text-muted-foreground text-center mt-2">Explore standalone houses with yards and privacy</p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition cursor-pointer">
-              <CardContent className="p-6 flex flex-col items-center">
-                <Building2 className="h-12 w-12 text-primary mb-4" />
-                <h3 className="text-lg font-medium">Apartments</h3>
-                <p className="text-muted-foreground text-center mt-2">Find modern apartments in prime locations</p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition cursor-pointer">
-              <CardContent className="p-6 flex flex-col items-center">
-                <Map className="h-12 w-12 text-primary mb-4" />
-                <h3 className="text-lg font-medium">Land</h3>
-                <p className="text-muted-foreground text-center mt-2">Buy land and build your own custom home</p>
-              </CardContent>
-            </Card>
-
-            <Card className="hover:shadow-lg transition cursor-pointer">
-              <CardContent className="p-6 flex flex-col items-center">
-                <Home className="h-12 w-12 text-primary mb-4" />
-                <h3 className="text-lg font-medium">Commercial</h3>
-                <p className="text-muted-foreground text-center mt-2">Office spaces and retail locations</p>
-              </CardContent>
-            </Card>
-          </div>
-
-          <div className="mt-8 text-center">
-            <Link href="/properties">
-              <Button variant="outline" size="lg">
-                View All Properties
-                <span className="ml-2">→</span>
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section> */}
 
       {/* Featured Properties */}
       <section className="py-12">
@@ -166,32 +110,7 @@ const Page = () => {
                 ? [1, 2, 3].map((i) => <SkeletonCard key={i} />)
                 : data?.data.slice(0, 3).map((property) => {
                   return (
-                    <Link href={`/property-details/${property._id}`} key={property._id}>
-                      <Card className="overflow-hidden hover:shadow-lg transition">
-                        <div className="aspect-video relative bg-muted">
-                          <div className="absolute top-2 left-2 bg-primary px-2 py-1 rounded text-xs text-primary-foreground font-medium">
-                            FOR {property.type.toUpperCase()}
-                          </div>
-                          <Image height={500} width={500} priority src={property.imageUrls[0]} alt={property.name} className="w-full h-full object-cover" />
-                        </div>
-                        <CardContent className="p-4">
-                          <div className="flex justify-between items-start">
-                            <div>
-                              <h3 className="font-bold text-lg">${property.regularPrice - property.discountAmount}</h3>
-                              <p className="text-card-foreground">{property.name}</p>
-                            </div>
-                            <Button variant="ghost" size="icon" className="h-8 w-8" onClick={(e) => handleCopy(e, property._id)}>
-                              <Share2 className="h-4 w-4" />
-                            </Button>
-                          </div>
-                          <p className="text-muted-foreground text-sm mt-2">{property.address}</p>
-                          <div className="flex gap-4 mt-4 text-sm text-muted-foreground">
-                            <div>{property.bedrooms} Beds</div>
-                            <div>{property.bathrooms} Baths</div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    </Link>
+                    <ProductCard property={property} key={property._id} />
                   )
                 })
             }
