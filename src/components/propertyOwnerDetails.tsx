@@ -70,12 +70,12 @@ const PropertyOwnerDetails = ({ id }: { id: string }) => {
           </div>
 
           <div className="flex items-center gap-3">
-            <span>Name:</span>
+            <span>Email:</span>
             <Link className="underline" target="_blank" href={`mailto:${data?.data.email}`}>{data?.data.email}</Link>
           </div>
 
           <div className="flex items-center gap-3">
-            <span>Name:</span>
+            <span>Phone Number:</span>
             <Link className="underline" target="_blank" href={`tel:+91${data?.data.number}`}>+91 {data?.data.number}</Link>
           </div>
 
