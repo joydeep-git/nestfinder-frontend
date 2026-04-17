@@ -19,7 +19,7 @@ import { useRouter } from "next/navigation";
 import { ChevronLeft, Upload, X } from "lucide-react";
 import { useMutation } from "react-query";
 import { AxiosErrorResponseType, ProductSuccessType } from "@/types/index";
-import { firebaseService } from "@/services/firebaseService";
+import { storageService } from "@/services/supabaseService";
 import { productService } from "@/services/productService";
 import { useAppSelector } from "@/redux/store";
 
@@ -133,7 +133,7 @@ const CreateProperty = () => {
 
       try {
         const imageUrls: string[] = await Promise.all(
-          selectedImages.map((val) => firebaseService.getDownloadUrl({ file: val.file, folder: "property" }))
+          selectedImages.map((val) => storageService.getDownloadUrl({ file: val.file, folder: "property" }))
         );
 
         const res = await productService.createProduct({ data: { ...data, imageUrls: imageUrls, userRef: user!._id! }, id: user!._id! });

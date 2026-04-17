@@ -5,9 +5,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'firebasestorage.googleapis.com',
+        hostname: 'caircqiavqtvychzxayf.supabase.co',
         port: '',
-        pathname: '/v0/b/nest-finder-da0f4.appspot.com/o/**',
+        pathname: '/storage/v1/object/public/**',
       },
     ],
   },
