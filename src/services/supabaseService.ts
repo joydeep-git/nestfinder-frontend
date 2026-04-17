@@ -18,10 +18,7 @@ class StorageService {
 
       if (error) throw error;
 
-      // Use the actual stored path from the upload response (more reliable)
-      const { data: publicUrlData } = this.supabase.storage
-        .from(bucket)
-        .getPublicUrl(uploadData.path);
+      const { data: publicUrlData } = this.supabase.storage.from(bucket).getPublicUrl(uploadData.path);
 
       return publicUrlData.publicUrl;
 
@@ -34,7 +31,7 @@ class StorageService {
     try {
       const bucket = folder === "profile" ? "profile_images" : "property_images";
 
-      // Extract just the file name from a full public URL if needed
+
       const fileName = path.includes("/storage/v1/object/public/")
         ? path.split(`/${bucket}/`).pop()!
         : path;
