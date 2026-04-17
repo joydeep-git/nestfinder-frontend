@@ -1,11 +1,11 @@
-import React from 'react';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Edit, Info, Menu } from 'lucide-react';
-import { ProductDataType } from '@/types/index';
+import { ProductDataType, UserDataType } from '@/types/index';
 import { useRouter } from 'next/navigation';
+import DeleteProperty from './DeleteProperty';
 
-const PropertyCardMenu = ({ product }: { product: ProductDataType; }) => {
+const PropertyCardMenu = ({ product, user, refetch }: { product: ProductDataType; user: UserDataType; refetch: () => void; }) => {
 
   const router = useRouter();
 
@@ -20,12 +20,15 @@ const PropertyCardMenu = ({ product }: { product: ProductDataType; }) => {
 
       <DropdownMenuContent className="w-fit">
 
-        <DropdownMenuItem onClick={() => router.push(`edit-property/${product._id}`)}>
-          <Edit /> Edit
-        </DropdownMenuItem>
 
         <DropdownMenuItem onClick={() => router.push(`property-details/${product._id}`)}>
           <Info /> View Details
+        </DropdownMenuItem>
+
+
+        <DropdownMenuItem>
+          <Edit /> Edit
+          <DeleteProperty userId={user!._id} productId={product._id} refetch={refetch} />
         </DropdownMenuItem>
 
       </DropdownMenuContent>

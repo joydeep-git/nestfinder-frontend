@@ -5,13 +5,12 @@ import { MotionDiv, MotionHeading, MotionText } from '@/components/utils/motionW
 import { useAppSelector } from '@/redux/store';
 import { productService } from '@/services/productService';
 import { AxiosErrorResponseType, multipleProductsSuccessType, ProductDataType } from '@/types/index';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Edit } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { useQuery } from "react-query";
 import PropertyCardMenu from "@/app/(authenticated_routes)/my-properties/PropertyCardMenu";
-import DeleteProperty from '@/app/(authenticated_routes)/my-properties/DeleteProperty';
 import ProductCard from '@/components/ProductCard';
 import LoadingAnimation from '@/components/utils/LoadingAnimation';
 
@@ -46,7 +45,7 @@ const MyProperties = () => {
   }, [refetch]);
 
 
-  if(isLoading) return <LoadingAnimation />
+  if (isLoading) return <LoadingAnimation />
 
   return (
     <MotionDiv className='pt-6 pb-12 max-w-screen-2xl'>
@@ -62,9 +61,12 @@ const MyProperties = () => {
               >
 
                 {/* passing del and menu */}
-                
-                <DeleteProperty userId={user!._id} productId={property._id} refetch={refetch} />
-                <PropertyCardMenu product={property} />
+
+                <Button size={"sm"} variant={"secondary"} onClick={() => router.push(`edit-property/${property._id}`)}>
+                  <Edit /> Edit
+                </Button>
+
+                {user && <PropertyCardMenu user={user} product={property} refetch={refetch} />}
               </ProductCard>
             ))}
           </div>

@@ -94,8 +94,8 @@ const CreateProperty = () => {
     if (!files || files.length === 0) return;
 
     for (const file of files) {
-      if (file.size > 2000000) { // 2MB
-        toast.error("Images should be less than 2 MB.");
+      if (file.size > 5000000) { // 5MB
+        toast.error("Images should be less than 5 MB.");
         e.target.value = "";
         return;
       }
