@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import LoadingAnimation from "@/components/utils/LoadingAnimation";
 import { MotionDiv, MotionHeading } from "@/components/utils/motionWrapper";
 import { useAppSelector } from "@/redux/store";
-import { firebaseService } from "@/services/firebaseService";
+import { storageService } from "@/services/supabaseService";
 import { productService } from "@/services/productService";
 import { AxiosErrorResponseType, ProductDataType, ProductSuccessType } from "@/types/index";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -91,7 +91,7 @@ const EditProperty = () => {
 
   // run on component load
   useEffect(() => {
-    if(pathname.includes("edit-property")) fetchProperty();
+    if (pathname.includes("edit-property")) fetchProperty();
   }, [fetchProperty, pathname]);
 
 
@@ -184,12 +184,12 @@ const EditProperty = () => {
 
       try {
 
-        // upload images on firebase
+        // upload new images to supabase
         const uploadedImageUrls = await Promise.all(
           selectedImages
             .filter(img => img.file) // Only upload new images
-            .map(async img => await firebaseService.getDownloadUrl({ file: img.file!, folder: "property" }))
-        );// getting new uploaded image URLs
+            .map(async img => await storageService.getDownloadUrl({ file: img.file!, folder: "property" }))
+        );
 
 
         // Create final image list
@@ -237,7 +237,7 @@ const EditProperty = () => {
 
 
   // show loading page
-  if ( fetchLoading || !existingPropertyData) return <LoadingAnimation />
+  if (fetchLoading || !existingPropertyData) return <LoadingAnimation />
 
 
   return (

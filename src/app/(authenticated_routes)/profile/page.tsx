@@ -11,7 +11,7 @@ import { useMutation } from "react-query";
 // Redux and Services
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { userService } from "@/services/userService";
-import { firebaseService } from "@/services/firebaseService";
+import { storageService } from "@/services/supabaseService";
 import { setUserState } from "@/redux/slices/authSlice";
 
 // UI Components
@@ -76,16 +76,14 @@ const ProfilePage = () => {
   const { mutate: imageMutate, isLoading: isImageLoading } = useMutation(
     async (file: File) => {
       const toastID = toast.loading("Updating Image...");
-      const imageUrl = await firebaseService.getDownloadUrl({ file, folder: "profile" });
+      const imageUrl = await storageService.getDownloadUrl({ file, folder: "profile" });
       const userData: AuthSuccessType = await userService.updateProfilePicture({ avatar: imageUrl, id: user!._id });
       dispatch(setUserState(userData.data));
       toast.dismiss(toastID);
     },
     {
-      onSuccess: (data) => {
+      onSuccess: () => {
         toast.success("Profile picture updated!");
-        console.log(data);
-        // dispatch(setUserState(data));
       },
       onError: () => {
         toast.error("Failed to change Image");
