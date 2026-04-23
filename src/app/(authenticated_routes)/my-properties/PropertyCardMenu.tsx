@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Edit, Info, Menu } from 'lucide-react';
+import { Info, Menu } from 'lucide-react';
 import { ProductDataType, UserDataType } from '@/types/index';
 import { useRouter } from 'next/navigation';
 import DeleteProperty from './DeleteProperty';
@@ -27,7 +27,7 @@ const PropertyCardMenu = ({ product, user, refetch }: { product: ProductDataType
 
 
         <DropdownMenuItem>
-          <Edit /> Edit
+          {/* <Edit /> Edit */}
           <DeleteProperty userId={user!._id} productId={product._id} refetch={refetch} />
         </DropdownMenuItem>
 

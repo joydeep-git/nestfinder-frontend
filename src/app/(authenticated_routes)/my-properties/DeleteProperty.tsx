@@ -3,9 +3,8 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { productService } from '@/services/productService';
 import { AxiosErrorResponseType, ProductSuccessType } from '@/types/index';
 import { Trash } from 'lucide-react';
-import React from 'react';
 import toast from 'react-hot-toast';
-import { Button } from '@/components/ui/button';
+
 
 const DeleteProperty = ({ userId, productId, refetch }: { userId: string; productId: string; refetch: () => void; }) => {
 
@@ -30,10 +29,10 @@ const DeleteProperty = ({ userId, productId, refetch }: { userId: string; produc
     <AlertDialog>
 
       <AlertDialogTrigger asChild>
-        <Button size="sm" variant="destructive">
+        <span className="text-red-500 flex items-center gap-2 cursor-pointer">
           <Trash />
           Delete
-        </Button>
+        </span>
       </AlertDialogTrigger>
 
       <AlertDialogContent>
